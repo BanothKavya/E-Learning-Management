@@ -1,0 +1,130 @@
+<%-include('../partials/signedinnav.ejs')%>;
+<style>
+    .image {
+      
+      border-radius: 25%;
+      align-self: center;
+      height: 300px;
+    }
+    p {
+      align-self: center;
+      font-size: larger;
+    }
+    .col-8{
+      display: flex;
+    }
+    button{
+      align-items: center;
+      align-self: center;
+    }
+    .card-course {
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 200px;
+      margin: 10px;
+      position: relative;
+      width: 300px;
+      overflow: hidden;
+    }
+    
+    .card-course img {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      object-fit: cover;
+    }
+    
+    .card-course .overlay {
+      background-color: rgba(255, 255, 255, 0.7);
+      bottom: 0;
+      color: black;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    
+    .card-course:hover .overlay {
+      opacity: 1;
+    }
+    
+    .card-course .overlay h2 {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 24px;
+    }
+    
+    .card-course .overlay p {
+      text-align: center;
+      margin: 10px;
+      font-size: 14px;
+    }
+  </style>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="container-fluid mt-4">
+            <div class="row">
+              <div class="card mb-3">
+                <ul class="list-group list-group-flush">
+                  <img src="/<%=student.Imageurl%>" class="image" alt="Avatar" style="width:200px">
+                  <p><%=student.firstName%></p>
+                  <a class="list-group-item list-group-item-action" href="/student/course-list">My Learning</a>
+                  <a class="list-group-item list-group-item-action " href="/student/profile">Profile</a>
+                  <a class="list-group-item list-group-item-action" href="/student/account">Account</a>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="col-lg-8">
+                <div class="container">
+                  <% courses.forEach(function(course, index) { %>
+                    <% if (index % 2 === 0) { %>
+                      <div class="row">
+                    <% } %>
+                    <div class="col-lg-6">
+                      <div class="card card-course">
+                        <img src="/<%=course.Imageurl%>" alt="Course Image" style="height: 250px;  background-size: cover; background-position: center;">
+                      
+                        <div class="overlay">
+                          <h2 class="card-title"><%= course.name %></h2>
+                          <p class="card-text"><%= course.description %></p>
+                          
+                        </div>
+                      </div>
+                     <div style="margin-left: 100px;"> <a href="/student/courseContent/<%= course._id %>" class="btn btn-primary ">View Course</a></div>
+                    </div>
+                    <% if ((index + 1) % 2 === 0 || index === courses.length - 1) { %>
+                      </div>
+                    <% } %>
+                  <% }) %>
+                </div>
+                
+              </div>
+            </div>
+
+           
+             
+            </div>
+
+          </div>
+        </div>
+       
+          
+        </div>
+      </div>
+    </div>
+
+
+
+<%-include('../partials/footer.ejs')%>
